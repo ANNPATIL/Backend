@@ -1,7 +1,5 @@
 package org.hrportal;
 
-import javax.persistence.Column;
-
 public class CandidatePayload {
 
     private String fname;
@@ -44,16 +42,13 @@ public class CandidatePayload {
         this.experience = experience;
     }
 
-    public Status getStatus() {
-        return status;
+    @Override
+    public String toString() {
+        return "CandidatePayload{" +
+                "fname='" + fname + '\'' +
+                ", lname='" + lname + '\'' +
+                ", age=" + age +
+                ", experience=" + experience +
+                '}';
     }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    private Status status;
-
-
-
 }

@@ -1,22 +1,29 @@
 package org.hrportal;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
 @Entity
-
-
 public class Candidate extends PanacheEntity {
 
     @Column
     public String fname;
+
     @Column
     public String lname;
+
     @Column
     public int age;
+
     @Column
     public int experience;
+
+    @Column
+    private Status status;
+
+    @Column
+    private String feedback;
 
     public Status getStatus() {
         return status;
@@ -25,11 +32,6 @@ public class Candidate extends PanacheEntity {
     public void setStatus(Status status) {
         this.status = status;
     }
-
-    @Column
-    private Status status;
-
-
 
     public String getFname() {
         return fname;
@@ -61,5 +63,25 @@ public class Candidate extends PanacheEntity {
 
     public void setExperience(int experience) {
         this.experience = experience;
+    }
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    }
+
+    @Override
+    public String toString() {
+        return "Candidate{" +
+                "fname='" + fname + '\'' +
+                ", lname='" + lname + '\'' +
+                ", age=" + age +
+                ", experience=" + experience +
+                ", status=" + status +
+                ", feedback='" + feedback + '\'' +
+                '}';
     }
 }
