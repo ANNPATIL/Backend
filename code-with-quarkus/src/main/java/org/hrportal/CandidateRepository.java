@@ -27,9 +27,9 @@ public class CandidateRepository implements PanacheRepository<Candidate> {
     }
 
     @Transactional
-    public List<Candidate> getCandidates(Status status) {
+    public List<Candidate> getCandidates(List<Status> status) {
         TypedQuery<Candidate> q =
-                em.createQuery("select t from Candidate t where t.status = :status", Candidate.class);
+                em.createQuery("select t from Candidate t where t.status in (:status)", Candidate.class);
         q.setParameter("status", status);
        return  q.getResultList();
     }

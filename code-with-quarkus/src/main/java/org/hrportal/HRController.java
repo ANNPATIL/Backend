@@ -8,6 +8,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
+import java.util.Arrays;
 import java.util.List;
 
 @Path("hr")
@@ -19,7 +20,7 @@ public class HRController {
     @GET
     public List<Candidate> getCandidates(){
         System.out.println("fetching candidate list for hr");
-        List<Candidate> candidates = candidateRepository.getCandidates(Status.NEW);
+        List<Candidate> candidates = candidateRepository.getCandidates(Arrays.asList(Status.NEW));
         System.out.println(candidates);
         return candidates;
     }
@@ -47,5 +48,23 @@ public class HRController {
         candidate.setStatus(Status.HR_REJECT);
         candidate.persist();
         return Response.status(Response.Status.OK).build();
+    }
+
+    @GET
+    @Path("approved_candidates")
+    public List<Candidate> GetApprovedCandidates() {
+        System.out.println("fetching approved candidate list for hr");
+        List<Candidate> candidates = candidateRepository.getCandidates(Arrays.asList(Status.HR_APPROVAL, Status.MANAGER_APPROVAL, Status.MANAGER_REJECT));
+        System.out.println(candidates);
+        return candidates;
+    }
+
+    @GET
+    @Path("rejected_candidates")
+    public List<Candidate> GetRejectedCandidates() {
+        System.out.println("fetching rejected candidate list for hr");
+        List<Candidate> candidates = candidateRepository.getCandidates(Arrays.asList(Status.HR_REJECT));
+        System.out.println(candidates);
+        return candidates;
     }
 }
